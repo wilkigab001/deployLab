@@ -24,7 +24,6 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
-const monkeys = [John, Jacob, Jingleheimer, schmidt]
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'))
