@@ -52,7 +52,7 @@ app.post('/api/monkeys', (req, res) => {
             monkeys.push(name)
  
             rollbar.log('Student was added successfully')
-            res.status(200).send(students)
+            res.status(200).send(monkeys)
          } else if (name === ''){
              res.status(400).send('You must enter a name.')
              rollbar.error('enter a name broski')
