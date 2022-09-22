@@ -35,18 +35,6 @@ app.get('/css', (req, res) => {
     rollbar.warning('Css has been deployed')
 })
 
-app.get('/api/monkeys', (req, res) => {
-    res.status(200).send(monkeys)
-})
-
-app.post('/api/monkeys', (req, res) => {
-    let {name} = req.body
-    
-    const index = monkeys.findInded(monkey => {
-        return monkey === name
-    })
-})
-
 try{
     nonExistentFunction()
 }catch(error){
