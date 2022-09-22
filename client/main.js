@@ -50,7 +50,7 @@ function submitHandler(evt) {
 axios
     .get('/api/monkeys')
     .then(res => {
-        putTheThingInTheView(res)
+        viewList(res)
     })
 
 addForm.addEventListener('submit', submitHandler)
