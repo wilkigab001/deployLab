@@ -14,6 +14,8 @@ app.use(express.json())
 app.use(express.static('client'))
 app.use(cors())
 
+let monkeys = ['monkey', 'donkey', 'mario', 'monk monk']
+
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
   accessToken: 'cf85e52698a24ea1aba5803a8ed22cd1',
@@ -32,6 +34,17 @@ app.get('/', (req, res) => {
 app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/styles.css'))
     rollbar.warning('Css has been deployed')
+})
+app.get('/monkeys', (req, res) => {
+    res.status(200).send(monkeys)
+})
+
+app.post('/monkeys', (req, res) => {
+    let {name} = req.body
+
+    const index = students.findIndex(monkey => {
+        return monkey === name
+    })
 })
 
 try{
