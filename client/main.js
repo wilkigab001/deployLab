@@ -14,7 +14,7 @@ function viewList(res) {
 
         element.addEventListener('click', () => {
             axios
-                 .delete(`/monkeys/${indexValue}}`)
+                 .delete(`/api/monkeys/${indexValue}}`)
                  .then(res => {
                     viewList(res);
                  })
@@ -26,7 +26,7 @@ function submitHandler(evt) {
     evt.preventDefault();
 
     axios
-        .post('monkeys', { name: nameInput.value })
+        .post('/api/monkeys', { name: nameInput.value })
         .then(res => {
             viewList(res)
         })
@@ -48,7 +48,7 @@ function submitHandler(evt) {
 
 
 axios
-    .get('/monkeys')
+    .get('/api/monkeys')
     .then(res => {
         putTheThingInTheView(res)
     })

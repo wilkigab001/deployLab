@@ -35,11 +35,11 @@ app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/styles.css'))
     rollbar.warning('Css has been deployed')
 })
-app.get('/monkeys', (req, res) => {
+app.get('/api/monkeys', (req, res) => {
     res.status(200).send(monkeys)
 })
 
-app.post('/monkeys', (req, res) => {
+app.post('/api/monkeys', (req, res) => {
     let {name} = req.body
 
     const index = students.findIndex(monkey => {
@@ -47,7 +47,7 @@ app.post('/monkeys', (req, res) => {
     })
 })
 
-app.delete('/monkeys/:index', (req, res) => {
+app.delete('/api/monkeys/:index', (req, res) => {
     const targetIndex = +req.params.index
     
     monkeys.splice(targetIndex, 1)
