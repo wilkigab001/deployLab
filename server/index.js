@@ -30,12 +30,13 @@ app.get('/', (req, res) => {
 
 app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/styles.css'))
+    rollbar.warning('Css has been deployed')
 })
 
 try{
     nonExistentFunction()
 }catch(error){
-    rollbar.critical(error.message)
+    rollbar.error(error.message)
 }
 
 app.listen(port, () => {
