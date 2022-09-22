@@ -35,6 +35,7 @@ app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/styles.css'))
     rollbar.warning('Css has been deployed')
 })
+
 app.get('/api/monkeys', (req, res) => {
     res.status(200).send(monkeys)
 })
@@ -42,9 +43,26 @@ app.get('/api/monkeys', (req, res) => {
 app.post('/api/monkeys', (req, res) => {
     let {name} = req.body
 
-    const index = students.findIndex(monkey => {
+    const index = monkeys.findIndex(monkey => {
         return monkey === name
     })
+
+    try {
+        if (index === -1 && name !== '') {
+            students.push(name)
+ 
+            rollbar.log('Student was added successfully')
+            res.status(200).send(students)
+         } else if (name === ''){
+             res.status(400).send('You must enter a name.')
+             rollbar.error('enter a name broski')
+         } else {
+             res.status(400).send('That student already exists.')
+             rollbar.error('Student already exists')
+        }
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 app.delete('/api/monkeys/:index', (req, res) => {
