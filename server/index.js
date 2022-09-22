@@ -32,6 +32,12 @@ app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/styles.css'))
 })
 
+try{
+    nonExistentFunction()
+}catch(error){
+    rollbar.error(error.message)
+}
+
 
 
 app.listen(port, () => {
