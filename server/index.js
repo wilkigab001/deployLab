@@ -35,10 +35,8 @@ app.get('/css', (req, res) => {
 try{
     nonExistentFunction()
 }catch(error){
-    rollbar.error(error.message)
+    rollbar.critical(error.message)
 }
-
-
 
 app.listen(port, () => {
     console.log('listening on port ' + port)
