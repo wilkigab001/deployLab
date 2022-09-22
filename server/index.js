@@ -24,6 +24,8 @@ var rollbar = new Rollbar({
 // record a generic message and send it to Rollbar
 rollbar.log('Hello world!')
 
+const monkeys = [John, Jacob, Jingleheimer, schmidt]
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/index.html'))
 })
@@ -31,6 +33,18 @@ app.get('/', (req, res) => {
 app.get('/css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/styles.css'))
     rollbar.warning('Css has been deployed')
+})
+
+app.get('/api/monkeys', (req, res) => {
+    res.status(200).send(monkeys)
+})
+
+app.post('/api/monkeys', (req, res) => {
+    let {name} = req.body
+    
+    const index = monkeys.findInded(monkey => {
+        return monkey === name
+    })
 })
 
 try{

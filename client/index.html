@@ -27,5 +27,70 @@
             Check out these super cool little buggers. They can be all yours for only a small price of 7000$. Only illegal in a few places, but don't worry about that cause they are small enough you can hide them! 
         </p>
     </div>
+    <h1>Monkey Names List</h1>
+    <form>
+        <input type='text' placeholder='type what you will name your monkey ...' />
+        <button>add monkey</button>
+    </form>
+    <section></section>
+    <script>
+        const addForm = document.querySelector('form');
+        const nameInput = document.querySelector('input');
+        const container = document.querySelector('section');
+
+        function putTheThingInTheView(res) {
+            container.innerHTML = ''
+            nameInput.value = ''
+
+            res.data.forEach((monkeyName, index) => {
+                container.innerHTML += `<p name=${index}>${monkeyName}</p>`
+            })
+
+            document.querySelectorAll('p').forEach(element => {
+                const theIndexValue = element.getAttribute('name');
+
+                element.addEventListener('click', () => {
+                    axios
+                        .delete(`/api/monkeys/${theIndexValue}`)
+                        .then(res => {
+                            putTheThingInTheView(res)
+                        })
+                })
+            })
+        }
+
+        function submitHandler(evt) {
+            evt.preventDefault();
+
+            axios
+                .post('/api/monkeys', { name: nameInput.value })
+                .then(res => {
+                    putTheThingInTheView(res)
+                })
+                .catch(err => {
+                    nameInput.value = ''
+
+                    const notif = document.createElement('aside')
+                    notif.innerHTML = `<p>${err.response.data}</p>
+                    <button class="close">close</button>`
+                    document.body.appendChild(notif)
+
+                    document.querySelectorAll('.close').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.target.parentNode.remove()
+                        })
+                    })
+                })
+        }
+
+        // get student list on initial load
+        axios
+            .get('/api/monkeys')
+            .then(res => {
+                putTheThingInTheView(res)
+            })
+
+        addForm.addEventListener('submit', submitHandler)
+    </script>
 </body>
 </html>
