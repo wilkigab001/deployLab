@@ -28,7 +28,7 @@ function submitHandler(evt) {
     axios
         .post('/api/monkeys', { name: nameInput.value })
         .then(res => {
-            viewList(res)
+            view(res)
         })
         .catch(err => {
             nameInput.value = ''
