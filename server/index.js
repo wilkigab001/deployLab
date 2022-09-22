@@ -47,6 +47,15 @@ app.post('/monkeys', (req, res) => {
     })
 })
 
+app.delete('/monkeys/:index', (req, res) => {
+    const targetIndex = +req.params.index
+    
+    monkeys.splice(targetIndex, 1)
+    rollbar.info('Monkey was deleted')
+    res.status(200).send(monkeys)
+})
+
+
 try{
     nonExistentFunction()
 }catch(error){
