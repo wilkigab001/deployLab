@@ -49,7 +49,7 @@ app.post('/api/monkeys', (req, res) => {
 
     try {
         if (index === -1 && name !== '') {
-            students.push(name)
+            monkeys.push(name)
  
             rollbar.log('Student was added successfully')
             res.status(200).send(students)
