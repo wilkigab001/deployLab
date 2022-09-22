@@ -4,12 +4,15 @@ require('dotenv').config()
 
 const path = require('path')
 
+const cors = require('cors')
+
 const port = process.env.PORT || 5000
 
 const app = express()
 
 app.use(express.json())
 app.use(express.static('client'))
+app.use(cors())
 
 var Rollbar = require('rollbar')
 var rollbar = new Rollbar({
